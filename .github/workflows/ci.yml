@@ -1,0 +1,47 @@
+# Test gate for this repository.
+#
+# The `test` job below deliberately fails until this repository's own toolchain
+# and test command replace the placeholder: a green check that ran no tests is
+# worse than a red one. Remove the `exit 1` once a real command is in place.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true # a superseded pull request run is pointless
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Install the project's toolchain here once this repository has one, for
+      # example:
+      #   - uses: actions/setup-node@v4
+      #     with: { node-version: 22 }
+      #   - uses: actions/setup-python@v5
+      #     with: { python-version: "3.12" }
+      #   - uses: dtolnay/rust-toolchain@stable
+      #   - uses: actions/setup-go@v5
+      #     with: { go-version: "1.23" }
+
+      # Replace this step with the real suite, for example:
+      #   npm ci && npm test
+      #   pip install -e ".[test]" && pytest
+      #   cargo test --all-features
+      #   go test ./...
+      - name: Test
+        run: |
+          echo "::error::no test toolchain configured yet; replace this step and drop the exit 1"
+          exit 1
