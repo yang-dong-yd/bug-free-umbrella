@@ -1,0 +1,31 @@
+# Test gate for this repository.
+#
+# This repository currently holds only standards and configuration files, so the
+# gate runs `./test.sh`, which asserts this repository's own invariants instead of
+# pretending a compiler ran. Replace `./test.sh` with the project's own toolchain
+# and suite as soon as the first code lands.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true # a superseded pull request run is pointless
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Test
+        run: ./test.sh
