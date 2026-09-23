@@ -1,8 +1,9 @@
 # Test gate for this repository.
 #
-# The `test` job below deliberately fails until this repository's own toolchain
-# and test command replace the placeholder: a green check that ran no tests is
-# worse than a red one. Remove the `exit 1` once a real command is in place.
+# This repository currently holds only standards and configuration files, so the
+# gate runs `./test.sh`, which asserts this repository's own invariants instead of
+# pretending a compiler ran. Replace `./test.sh` with the project's own toolchain
+# and suite as soon as the first code lands.
 name: CI
 
 on:
@@ -26,22 +27,5 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Install the project's toolchain here once this repository has one, for
-      # example:
-      #   - uses: actions/setup-node@v4
-      #     with: { node-version: 22 }
-      #   - uses: actions/setup-python@v5
-      #     with: { python-version: "3.12" }
-      #   - uses: dtolnay/rust-toolchain@stable
-      #   - uses: actions/setup-go@v5
-      #     with: { go-version: "1.23" }
-
-      # Replace this step with the real suite, for example:
-      #   npm ci && npm test
-      #   pip install -e ".[test]" && pytest
-      #   cargo test --all-features
-      #   go test ./...
       - name: Test
-        run: |
-          echo "::error::no test toolchain configured yet; replace this step and drop the exit 1"
-          exit 1
+        run: ./test.sh
