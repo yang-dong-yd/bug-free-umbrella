@@ -43,7 +43,7 @@ else
 fi
 
 # 4. The release pipeline is called at an explicit ref.
-if grep -qE 'uses:[[:space:]]+yang-dong-yd/repo-template/\.github/workflows/release\.yml@[^[:space:]]+' \
+if grep -qE 'uses:[[:space:]]+nexform-tech/repo-template/\.github/workflows/release\.yml@[^[:space:]]+' \
      .github/workflows/release.yml; then
   pass "release.yml calls the shared reusable workflow at an explicit ref"
 else
